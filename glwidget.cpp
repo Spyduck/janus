@@ -703,7 +703,9 @@ void GLWidget::paintGL()
         overrideHeight = height();
         RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount(), false, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
 #else
-        RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount(), false, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
+        overrideWidth = width()*2;
+        overrideHeight = height()*2;
+        RendererInterface::m_pimpl->RequestScreenShot(overrideWidth, overrideHeight, RendererInterface::m_pimpl->GetMSAACount(), false, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
 #endif
         take_screenshot = false;
     }
@@ -717,8 +719,10 @@ void GLWidget::paintGL()
         overrideHeight = height();
         RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount(), false, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
 #else
+        overrideWidth = 8192;
+        overrideHeight = 4096;
         //take_screenshot_path
-        RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount() * 2, true, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
+        RendererInterface::m_pimpl->RequestScreenShot(overrideWidth, overrideHeight, RendererInterface::m_pimpl->GetMSAACount() * 2, true, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
 #endif
         take_screenshot_cubemap = false;
     }
